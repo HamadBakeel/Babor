@@ -20,12 +20,7 @@
 <!-- inject:js -->
 <script>
     $(document).ready(function() {
-
-        $('#carColor').click(){
-            $('#color').textContent = $('#carColor').value();
-        }
-
-        $('.previewImage').change(function() {
+                $('.previewImage').change(function() {
             for (var i = 0; i < $(this)[0].files.length; i++) {
                 $(".previewFrames").append(
                     `<button type="button" class="btn close" id="btn-${i}"
@@ -40,6 +35,10 @@
             }
         });
         // $('#nav-tab a[data-bs-toggle="tab" href="#{{ old('tab') }}"]').tab('show');
+
+
+
+
     });
 </script>
 <script src="{{ @asset('assets/js/jQuery.min.js') }}"></script>
@@ -47,6 +46,7 @@
 <script src="{{ @asset('assets/js/template.js') }}"></script>
 <script src="{{ @asset('assets/js/hoverable-collapse.js') }}"></script>
 <script src="{{ @asset('assets/js/off-canvas.js') }}"></script>
+<script src="{{ @asset('assets/js/carImagesSlider.js') }}"></script>
 <script src="{{ @asset('assets/vendors/base/vendor.bundle.base.js') }}"></script>
 
 
