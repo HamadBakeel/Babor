@@ -10,22 +10,37 @@
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                        <div class="col-lg-12 col-md-7 col-12 " style="direction:ltr ;margin: right 0px;">
-                        <div class="search-bar-top">
-                            <div class="search-bar">
-                            <h4 class="card-title">عرض بحسب</h4>
-                                <select>
-                                    <option selected="selected"> الكل</option>
-                                    <option>اسم السيارة</option>
-                                    <option>تاريخ البدء</option>
-                                    <option>اقل قيمة للمزايدة</option>
-                                    <option>  حالة المزاد</option>
+                            <div class="col-lg-12 col-md-7 col-12 " style="direction:ltr ;margin: right 0px;">
+                                <div class="search-bar-top">
+                                    <div class="search-bar">
+                                        <h4 class="card-title">عرض بحسب</h4>
+                                        <select id="filter-auction" class="filter form-select">
+                                            <option selected="selected" value="0">  اسم السيارة</option>
+                                            <option value="سنتافي">سنتافي </option>
+                                            <option value="برادو">برادو </option>
+                                            <option value="توسان">  توسان</option>
+                                            <option value="كامري">  كامري</option>
 
-                                </select>
+                                        </select>
+                                       
+                                        <select id="filter-brand" class="filter1 form-select">
+                                            <option selected="selected" value="0"> ماركة السيارة</option>
+                                            <option value="تويوتا"> تويوتا</option>
+                                            <option value="هونداي"> هونداي</option>
+                                            <option value="كيا">  كيا</option>
+                                            <option value="مرسديس">  مرسديس</option>
 
+                                        </select>
+                                        <select id="filter-status" class="filter2 form-select">
+                                            <option selected="selected" value="0">  حالة المزاد</option>
+                                            <option value="مفعل">مفعل </option>
+                                            <option value="غيرمفعل"> غيرمفعل</option>
+
+                                        </select>
+                                    </div>
+                                    
+                                </div>
                             </div>
-                        </div>
-                    </div>
                             <h4 class="card-title">عرض المزادات</h4>
                             @if (session()->has('errorEdit'))
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -63,81 +78,89 @@
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                        <th>
-                                                  الصورة
-                                            </th>
-                                        <th>
-                                                 اسم السيارة
+                                            <th>
+                                                الصورة
                                             </th>
                                             <th>
-                                                  الموديل
+                                                ماركة السيارة
+                                            </th>
+                                            <th>
+                                                اسم السيارة
+                                            </th>
+                                            <th>
+                                                الموديل
                                             </th>
                                             <th>
                                                 السعر الابتدائي
                                             </th>
                                             <th>
-                                                 تاريخ البدء
+                                                تاريخ البدء
                                             </th>
                                             <th>
-تاريخ الانتهاء                                            </th>
+                                                تاريخ الانتهاء
+                                            </th>
                                             <th>
-اخر سعر للمزاد                                            </th>
-<th>
-اقل قيمة للمزايدة                                          </th>
-<th>
-الفائز بالمزاد                                              </th>
-<th>
-   نسبة الموقع                                              </th>
-<th>
-مبلغ التأمين
-                                               </th>
+                                                السعر الاحتياطي
+                                            </th>
+                                            <th>
+                                                اقل قيمة للمزايدة </th>
+                                            <th>
+                                                الفائز بالمزاد </th>
+                                            <th>
+                                                نسبة الموقع </th>
+                                            <th>
+                                                مبلغ التأمين
+                                            </th>
 
-<th>
-حالة المزاد                                              </th>
+                                            <th>
+                                                حالة المزاد </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody  class=" Auction_card ">
                                         @foreach ($auctions as $auction)
-
                                             <tr>
-                                                <td class="py-1">
-                                                    <img src="/images/cars/{{ $car->imge }}" alt="image" />
+                                                <td >
+                                                    <img src="/images/cars/{{ $auction->car->thumbnail }}" alt="image" />
+                                                </td>
+                                                <td class="brand brand_filed ">
+                                                    {{ $auction->car->brand->name }}
+                                                </td>
+                                                <td class="name Auction_filed ">
+                                                    {{ $auction->car->series->name }}
                                                 </td>
                                                 <td>
-                                                {{ $car->name }}
+                                                    {{ $auction->car->model }}
                                                 </td>
                                                 <td>
-                                                {{ $car->model }}
-                                                   </td>
-                                                   <td>
-                                                   {{ $auction->startingPrice }}
-                                                   </td>
-                                                   <td>
-                                                   {{ $auction->startingDate }}
-                                                   </td>
-                                                   <td>
-                                                   {{ $auction->closeDate }}
-                                                   </td>
-                                                   <td>
-                                                   {{ $auction->winnerPrice }}
-                                                   </td>
-                                                   <td>
-                                                   {{ $auction->minic }}
-                                                   </td>
-                                                   <td>
-                                                   {{ $auction->winner }}
-                                                   </td>
-                                                   <td>
-                                                   {{ $auction->commission }}
-                                                   </td>
-                                                   <td>
-                                                   {{ $auction->securityDeposit }}
-                                                   </td>
-                                                <td>
-                                                {{ $auction->status }}
+                                                    {{ $auction->openingBid }}
                                                 </td>
-
-
+                                                <td>
+                                                    {{ $auction->startDate }}
+                                                </td>
+                                                <td>
+                                                    {{ $auction->closeDate }}
+                                                </td>
+                                                <td>
+                                                    {{ $auction->reservePrice }}
+                                                </td>
+                                                <td>
+                                                    {{ $auction->minInc }}
+                                                </td>
+                                                <td>
+                                                    {{ $auction->winnerPrice }}
+                                                </td>
+                                                <td>
+                                                    {{ $auction->winner }}
+                                                </td>
+                                                <td>
+                                                    {{ $auction->commission }}
+                                                </td>
+                                                <td>
+                                                    {{ $auction->securityDeposit }}
+                                                </td>
+                                                <td class="status status_filed "  >
+                                                    {{ $auction->status }}
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
