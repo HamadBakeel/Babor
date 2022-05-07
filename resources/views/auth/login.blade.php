@@ -3,7 +3,7 @@
 
 {{-- @include('partials.header') --}}
 
- @include('Front.include.header') 
+ @include('Front.include.header')
 
 <body>
     <div class="container-scroller" dir="rtl">
@@ -52,7 +52,7 @@
                                         الدخول</button>
                                 </div>
                                 <div class="my-2 d-flex flex-column justify-content-start mb-2 " >
-                                    <div> 
+                                    <div>
                                     <div  >
                                         <input type="checkbox" class="form-check-input " id="rememberMe">
                                         <label class="form-check-label text-muted" style=""

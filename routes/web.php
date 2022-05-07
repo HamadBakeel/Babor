@@ -13,6 +13,7 @@ use App\Http\Controllers\user\UserAuctionController;
 use App\Http\Controllers\Authentication\authcontroller;
 use App\Http\Controllers\Admin\CarCharacteristicsController;
 use App\Http\Controllers\Admin\AcutionController;
+use App\Http\Controllers\Controller;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 // use \Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Admin\CategoriesController;
@@ -181,3 +182,5 @@ Route::get('/ser', function () {
     return view('Admin.services.service');
 });
 
+Route::get('fcm',[Controller::class, 'index']);
+Route::get('send-notification',[Controller::class, 'sendNotification']);
