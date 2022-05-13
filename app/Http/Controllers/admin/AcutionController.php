@@ -82,9 +82,9 @@ class AcutionController extends Controller
                             'message' => "تمت إضافة مزاد جديد",
                         'user_id' => $user->id ,
                         'state' => 0,
-                        'link' => $found->id
+                        'link' => $found->id,
+                        'type' => 1
                     ]);
-//                    $data['id'] = $notification->id;
                     $brand = $found->car->brand->name;
                     $series = $found->car->series->name;
                     $model = $found->car->model;
@@ -93,6 +93,7 @@ class AcutionController extends Controller
                     $data['link'] = $found->id;
                     $data['price'] = $found->openingBid;
                     $data['endDate'] = $found->closeDate;
+                    $data['type'] = $notification->type;
                     $data['user_id'] = $user->id;
 
                     $pusher->trigger('notify-channel', 'App\\Events\\Notify', $data);
