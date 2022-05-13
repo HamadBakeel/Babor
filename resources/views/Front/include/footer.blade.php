@@ -81,7 +81,7 @@
                             <p> © 2020 <a href="#" target="_blank">بابور</a> - جميع الحقوق محفوظة</p>
                         </div>
                     </div>
-                
+
                 </div>
             </div>
         </div>
@@ -189,7 +189,7 @@
             </li>
 `;
 {{--         var data = {!! json_encode($data, JSON_HEX_TAG) !!};--}}
-        if(data.user_id.toString() =="{!! Auth::id() !!}")
+        if(data.user_id.toString() !="{!! Auth::id() !!}")
          document.getElementById('shopping-list').prepend(node);
      });
     // pusher.disconnect();
