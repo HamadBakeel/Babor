@@ -172,10 +172,12 @@
      });
 
      var channel = pusher.subscribe('notify-channel');
+     // var channel2 = pusher.subscribe('notify-channel2');
+
      channel.bind('App\\Events\\Notify', function(data) {
-         alert("{!! Auth::id() !!}");
-         var node = document.createElement('li');
-             node.innerHTML =`
+         alert( "{!! var_dump(Auth::id()) !!}");
+         var newAuction = document.createElement('li');
+         newAuction.innerHTML =`
             <li>
                 <a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
                 <a href="auction/${data.link}">
@@ -188,11 +190,31 @@
                 </a>
             </li>
 `;
-{{--         var data = {!! json_encode($data, JSON_HEX_TAG) !!};--}}
-        if(data.user_id.toString() !="{!! Auth::id() !!}")
-         document.getElementById('shopping-list').prepend(node);
+        if(data.user_id.toString() !="{!! var_dump(Auth::id())!!}"){
+            document.getElementById('shopping-list').prepend(newAuction);
+        }
      });
-    // pusher.disconnect();
+
+{{--     channel2.bind('App\\Events\\Notify', function(data) {--}}
+{{--         alert( data.user_id.toString);--}}
+{{--         var auctionAccepted = document.createElement('li');--}}
+{{--         auctionAccepted.innerHTML =`--}}
+{{--            <li>--}}
+{{--                <a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>--}}
+{{--                <a href="auction/${data.link}">--}}
+{{--                    <div class="quantity text-dark">--}}
+{{--                        <h4 class="fw-bold"> ${data.message}</h4>--}}
+{{--                        <span class="amount"></span>--}}
+{{--                        <p class="d-block mb-0">ينتهي بتاريخ ${data.endDate} </p>--}}
+{{--                    </div>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+{{--`;--}}
+
+{{--         if(data.user_id.toString() =="{!! Auth::id() !!}") {--}}
+{{--             document.getElementById('shopping-list').prepend(auctionAccepted);--}}
+{{--         }--}}
+{{--     });--}}
  </script>
 
  </body>

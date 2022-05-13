@@ -64,8 +64,7 @@ class AcutionController extends Controller
 
         $notify = new NotificationController();
         $notify->newAuctionNotification($found);
-
-
+        $notify->auctionAccepted($found);
         }
 
         if($request->has('disapprove')){

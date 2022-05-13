@@ -10,6 +10,12 @@ use Pusher\Pusher;
 use App\Models\Notification;
 class NotificationController extends Controller
 {
+
+    public function __construct()
+    {
+
+    }
+
     public function newAuctionNotification(Auction $auction)
     {
 
@@ -25,9 +31,7 @@ class NotificationController extends Controller
         );
 
         $notification = new Notification();
-//            $auction = Auction::whereId('id');
         $user=User::where('id',$auction->auctioneer_id)->first();
-//            $users = User::all()->except(Auth::id());
         $notification = Notification::create([
             'message' => "تمت إضافة مزاد جديد",
             'user_id' => $user->id ,
@@ -47,12 +51,37 @@ class NotificationController extends Controller
         $data['user_id'] = $user->id;
 
         $pusher->trigger('notify-channel', 'App\\Events\\Notify', $data);
-//        return redirect()->back();
     }
 
-    public function save_notification()
+    public function auctionAccepted(Auction $auction)
     {
-//        sender
-//
+        $options = array(
+            'cluster' => env('PUSHER_APP_CLUSTER'),
+            'encrypted' => true
+        );
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            $options
+        );
+
+        $notification = new Notification();
+        $user=User::where('id',$auction->auctioneer_id)->first();
+        $notification = Notification::create([
+            'message' => "تمت الموافقة على مزادك من قبل إدارة الموقع",
+            'user_id' => $user->id,
+            'state' => 0,
+            'link' => $auction->id,
+            'type' => 2
+        ]);
+        $data['message'] = $notification->message;
+        $data['link'] = $auction->id;
+        $data['price'] = $auction->openingBid;
+        $data['endDate'] = $auction->closeDate;
+        $data['type'] = $notification->type;
+        $data['user_id'] = $user->id;
+
+        $pusher->trigger('notify-channel2', 'App\\Events\\Notify', $data);
     }
 }
