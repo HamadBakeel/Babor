@@ -190,9 +190,9 @@
                 </a>
             </li>
 `;
-        if(data.user_id.toString() !="{!! var_dump(Auth::id())!!}"){
+        {{--if(data.user_id.toString() !="{!! var_dump(Auth::id())!!}"){--}}
             document.getElementById('shopping-list').prepend(newAuction);
-        }
+        // }
      });
 
 {{--     channel2.bind('App\\Events\\Notify', function(data) {--}}

@@ -11,11 +11,28 @@ use App\Models\Notification;
 class NotificationController extends Controller
 {
 
-    public function __construct()
+    public function notification()
     {
 
-    }
+        $options = array(
+            'cluster' => env('PUSHER_APP_CLUSTER'),
+            'encrypted' => true
+        );
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            $options
+        );
 
+        $data['message'] = 'message';
+        $data['link'] = 'link';
+        $data['price'] = 123;
+        $data['endDate'] = 'today';
+        $data['user_id'] = 11;
+
+        $pusher->trigger('notify-channel', 'App\\Events\\Notify', $data);
+    }
     public function newAuctionNotification(Auction $auction)
     {
 
